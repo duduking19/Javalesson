@@ -1,21 +1,21 @@
 package question2;
 
 /**
- * Demonstrates a generic Pair class with different type arguments.
+ * 演示带两个类型参数的泛型类 Pair。
  */
 public class Question2Main {
 
     public static void main(String[] args) {
-        // Pair<String, Integer> can model a name-score pair.
+        // Pair<String, Integer> 可用于表示“姓名-分数”这样的数据对。
         Pair<String, Integer> student = new Pair<>("Alice", 95);
-        // Pair<Double, String> shows that the same class works for another type combination.
+        // Pair<Double, String> 说明同一个泛型类可以适配另一组类型参数。
         Pair<Double, String> measurement = new Pair<>(36.5, "Celsius");
 
         System.out.println("Initial pairs:");
         System.out.println("student = " + student);
         System.out.println("measurement = " + measurement);
 
-        // Update both pair objects to verify the setter methods.
+        // 修改两个对象中的值，验证 setter 方法是否工作正常。
         student.setFirst("Bob");
         student.setSecond(88);
         measurement.setFirst(98.6);
@@ -30,18 +30,18 @@ public class Question2Main {
 }
 
 /**
- * Stores two related values whose types are decided by the caller.
+ * 保存一对相关的数据，具体类型由调用者决定。
  *
- * @param <F> type of the first value
- * @param <S> type of the second value
+ * @param <F> 第一个元素的类型
+ * @param <S> 第二个元素的类型
  */
 class Pair<F, S> {
-    // The first and second positions are independent, so each gets its own type parameter.
+    // 第一项和第二项彼此独立，因此分别使用不同的类型参数描述。
     private F first;
     private S second;
 
     /**
-     * Initializes the pair with two values.
+     * 使用给定的两个值初始化对象。
      */
     public Pair(F first, S second) {
         this.first = first;
@@ -49,28 +49,28 @@ class Pair<F, S> {
     }
 
     /**
-     * Returns the first element of the pair.
+     * 返回第一个元素。
      */
     public F getFirst() {
         return first;
     }
 
     /**
-     * Replaces the first element with a new value of the same declared type.
+     * 用相同类型的新值替换第一个元素。
      */
     public void setFirst(F first) {
         this.first = first;
     }
 
     /**
-     * Returns the second element of the pair.
+     * 返回第二个元素。
      */
     public S getSecond() {
         return second;
     }
 
     /**
-     * Replaces the second element with a new value of the same declared type.
+     * 用相同类型的新值替换第二个元素。
      */
     public void setSecond(S second) {
         this.second = second;
@@ -78,7 +78,7 @@ class Pair<F, S> {
 
     @Override
     public String toString() {
-        // Format the pair for concise console display in the demo program.
+        // 以简洁形式输出，便于主程序直接打印观察结果。
         return "(" + first + ", " + second + ")";
     }
 }

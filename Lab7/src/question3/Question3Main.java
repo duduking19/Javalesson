@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Demonstrates polymorphism with a CarbonFootprint interface.
+ * 使用 CarbonFootprint 接口演示多态调用。
  */
 public class Question3Main {
 
     public static void main(String[] args) {
-        // The list is typed to the interface so all implementations can be handled uniformly.
+        // 列表声明为接口类型，这样不同实现类都能放进去统一处理。
         List<CarbonFootprint> items = new ArrayList<>();
         items.add(new Building("Teaching Building", 12000));
         items.add(new Car("Compact Petrol Car", 15000));
         items.add(new Bicycle("City Bicycle", 2000));
 
         System.out.println("Carbon footprint summary (kg CO2e / year)");
-        // Each object computes its own result, but the loop only depends on the interface.
+        // 循环只依赖接口方法，具体计算逻辑由各个实现类自己完成。
         for (CarbonFootprint item : items) {
             System.out.printf(
                     "%-18s %-22s %.2f%n",
@@ -29,30 +29,30 @@ public class Question3Main {
 }
 
 /**
- * Common contract for objects that can estimate an annual carbon footprint.
+ * 能够估算年度碳足迹的对象都要遵守这组方法约定。
  */
 interface CarbonFootprint {
     /**
-     * Returns the estimated annual carbon footprint in kilograms of CO2e.
+     * 返回估算得到的年度碳足迹，单位为 kg CO2e。
      */
     double getCarbonFootprint();
 
     /**
-     * Returns a short category label used in the summary table.
+     * 返回类别名称，用于汇总输出。
      */
     String getCategory();
 
     /**
-     * Returns object-specific descriptive information for display.
+     * 返回对象的描述信息，便于输出时区分样本。
      */
     String getDescription();
 }
 
 /**
- * Models a building whose footprint is estimated from annual electricity usage.
+ * 建筑物类，根据年度用电量估算碳足迹。
  */
 class Building implements CarbonFootprint {
-    // Approximate emission factor in kg CO2e per kWh.
+    // 每千瓦时电力对应的近似排放因子，单位为 kg CO2e。
     private static final double ELECTRICITY_FACTOR = 0.556;
 
     private final String name;
@@ -65,7 +65,7 @@ class Building implements CarbonFootprint {
 
     @Override
     public double getCarbonFootprint() {
-        // Electricity consumption multiplied by the chosen factor gives the yearly estimate.
+        // 用电量乘以排放因子，得到年度碳排放估算值。
         return annualElectricityKwh * ELECTRICITY_FACTOR;
     }
 
@@ -81,10 +81,10 @@ class Building implements CarbonFootprint {
 }
 
 /**
- * Models a car whose footprint is estimated from annual travel distance.
+ * 汽车类，根据年度行驶里程估算碳足迹。
  */
 class Car implements CarbonFootprint {
-    // Approximate emission factor in kg CO2e per kilometer for the sample car.
+    // 每公里对应的近似排放因子，单位为 kg CO2e。
     private static final double CAR_FACTOR = 0.175;
 
     private final String model;
@@ -97,7 +97,7 @@ class Car implements CarbonFootprint {
 
     @Override
     public double getCarbonFootprint() {
-        // Distance-based estimate for annual driving emissions.
+        // 按行驶里程估算年度排放量。
         return annualKilometers * CAR_FACTOR;
     }
 
@@ -113,10 +113,10 @@ class Car implements CarbonFootprint {
 }
 
 /**
- * Models a bicycle whose footprint is very low and is estimated by distance.
+ * 自行车类，用较小的距离因子模拟其较低的碳足迹。
  */
 class Bicycle implements CarbonFootprint {
-    // Small factor used to represent the low operational impact of cycling.
+    // 使用较小因子体现自行车出行的低排放特点。
     private static final double BICYCLE_FACTOR = 0.005;
 
     private final String type;
@@ -129,7 +129,7 @@ class Bicycle implements CarbonFootprint {
 
     @Override
     public double getCarbonFootprint() {
-        // Even a low-impact transport mode can still be represented with the same interface.
+        // 即便是低排放交通工具，也可以通过同一接口统一建模和计算。
         return annualKilometers * BICYCLE_FACTOR;
     }
 
